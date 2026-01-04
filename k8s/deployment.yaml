@@ -22,4 +22,9 @@ spec:
         image: IMAGE_PLACEHOLDER
         ports:
         - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: product-service-config
+        - secretRef: 
+            name: product-services-secret
 
