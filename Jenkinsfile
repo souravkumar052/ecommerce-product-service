@@ -40,6 +40,18 @@ pipeline {
                 '''
             }
         }
+        stage('Deploy to GKE') {
+	    steps {
+        	sh '''
+         	  sed -i "s|IMAGE_PLACEHOLDER|$REGION-docker.pkg.dev/$PROJECT_ID/$REPO/$IMAGE:${BUILD_NUMBER}|g" k8s/deployment.yaml
+
+          	  kubectl apply -f k8s/deployment.yaml
+         	  kubectl apply -f k8s/service.yaml
+
+         	  kubectl rollout status deployment/product-service --timeout=120s
+                '''
+   	    }
+ 	}
     }
 }
 
