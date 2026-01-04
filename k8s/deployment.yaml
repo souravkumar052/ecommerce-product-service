@@ -26,5 +26,5 @@ spec:
         - configMapRef:
             name: product-service-config
         - secretRef: 
-            name: product-services-secret
+            name: product-service-secret
 
